@@ -85,7 +85,19 @@ input[type="submit"] {width: 30%;}
   }
 }
 
+#resetbtn:hover, #submitbtn:hover  {
+  cursor: pointer;
+}
 
+input#resetbtn {
+    background-color: #ffaaaa;
+    color: #3f0707;
+}
+
+input#submitbtn {
+    background-color: #aaf0aa;
+    color: #0a3c0a;
+}
 </style>
 
 
@@ -204,7 +216,7 @@ function clearAllFields() {
   <span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
 </div>
 
-<div class="Gbtnreset"> 
+<div class="Gbtnreset form-field"> 
     <label for="resetbtn"></label>
     <input id="resetbtn" onclick="clearFields()" type="reset" value="Clear" />
 </div>
