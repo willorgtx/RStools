@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
 <html>
 <body>
-
 
 <style>
     body {
@@ -38,10 +38,40 @@ input {
 
 </style>
 
-<script type="text/javascript">var submitted=false;</script>
+
+<script type="text/javascript">
+var submitted = false;
+
+// Function to save data to cookies
+function saveDataToCookies() {
+    var formElements = document.forms[0].elements;
+    for (var i = 0; i < formElements.length; i++) {
+        var element = formElements[i];
+        if (element.name && element.type !== 'submit' && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161') {
+            document.cookie = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value) + ';path=/;max-age=86400'; // Expires in 1 day
+        }
+    }
+}
+
+// Function to load data from cookies
+function loadDataFromCookies() {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].split('=');
+        var element = document.forms[0].elements[decodeURIComponent(cookie[0].trim())];
+        if (element && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161') {
+            element.value = decodeURIComponent(cookie[1]);
+        }
+    }
+}
+
+// Load data when the page is loaded
+window.onload = loadDataFromCookies;
+
+</script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
-<form id="form" class="form validate" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
+<form class="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
     onsubmit="submitted=true;">
     
 <div class="form-field">   
@@ -51,7 +81,7 @@ input {
 
 <div class="form-field">   
 <label>Date</label>
-<input name="entry.835110776" type="date" placeholder="" />
+<input type="date" />
 </div>
 
 <div class="form-field">   
@@ -104,7 +134,6 @@ input {
 <input type="submit" value="Send" />
 </div>
 </form>
-
 
 </body>
 </html>
