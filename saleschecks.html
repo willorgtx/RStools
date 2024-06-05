@@ -141,7 +141,7 @@ function clearAllFields() {
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
 <form id="form" class="parent form validate" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
-    onsubmit="submitted=true; saveDataToCookies(); clearFields();">
+    onsubmit="submitted=true; saveDataToCookies();">
     
 <div class="GRug form-field">   
 <label for="rugnum">Rug #</label>
@@ -231,6 +231,7 @@ function clearAllFields() {
       .then(data => {
         console.log(data);
         $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
+         clearFields();
         //alert("Form Submitted");
       })
       .catch(err => console.error(err));
