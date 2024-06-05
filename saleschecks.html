@@ -86,6 +86,7 @@ var submitted = false;
 // Function to save data to cookies
 function saveDataToCookies() {
     var formElements = document.forms[0].elements;
+    $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
     for (var i = 0; i < formElements.length; i++) {
         var element = formElements[i];
         if (element.name && element.type !== 'submit' && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161') {
@@ -109,16 +110,13 @@ function loadDataFromCookies() {
 // Load data when the page is loaded
 window.onload = loadDataFromCookies;
 
-//Clicking on the Save button will activate Successful Save message
-$(".saveButton").click(function(){
-  $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
-});
+
 
 </script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
 <form id="form" class="parent form validate" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
-    onsubmit="submitted=true;">
+    onsubmit="submitted=true; saveDataToCookies();">
     
 <div class="GRug form-field">   
 <label>Rug #</label>
