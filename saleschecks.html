@@ -3,6 +3,51 @@
 <html>
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <script>
+  let url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse"; //action url
+  let form = document.querySelector("#form"); //form element
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); //prevent default behaviour
+
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        header: {
+          'Content-Type': 'application/json'
+        },
+        body: getInputData()
+      })
+      .then(data => {
+        console.log(data);
+        $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
+        alert("Form Submitted");
+      })
+      .catch(err => console.error(err));
+  });
+
+  //populating input data
+  function getInputData() {
+    let dataToPost = new FormData(); //formdata API
+
+    //fill name attributes to corresponding values
+    dataToPost.append("entry.115620161", document.querySelector("#rugnum").value);
+    dataToPost.append("entry.835110776", document.querySelector("#datesold").value);
+    dataToPost.append("entry.1803696216", document.querySelector("#salesman").value);
+    dataToPost.append("entry.1479748284", document.querySelector("#sprice").value);
+    dataToPost.append("entry.1896447446", document.querySelector("#fname").value);
+    dataToPost.append("entry.1387502817", document.querySelector("#lname").value);
+    dataToPost.append("entry.474662515", document.querySelector("#street").value);
+    dataToPost.append("entry.1353087319", document.querySelector("#cityst").value);
+    dataToPost.append("entry.1528061623", document.querySelector("#zipcode").value);
+    dataToPost.append("entry.30830654", document.querySelector("#phonenum").value);
+    dataToPost.append("entry.835110776_year", "";
+    dataToPost.append("entry.835110776_month", "";
+    dataToPost.append("entry.835110776_day", "";
+    return dataToPost;
+  }    
+  </script>
 </head>
         
 <body>
@@ -110,8 +155,6 @@ function loadDataFromCookies() {
 // Load data when the page is loaded
 window.onload = loadDataFromCookies;
 
-
-
 </script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
@@ -119,54 +162,54 @@ window.onload = loadDataFromCookies;
     onsubmit="submitted=true; saveDataToCookies();">
     
 <div class="GRug form-field">   
-<label>Rug #</label>
-<input name="entry.115620161" type="text" placeholder="" />
+<label for="rugnum">Rug #</label>
+<input id="rugnum" name="entry.115620161" type="text" placeholder="" />
 </div>
 
 <div class="Gdate form-field">   
-<label>Date</label>
-<input name="entry.835110776" type="date" placeholder="" />
+<label for="datesold">Date</label>
+<input id="datesold" name="entry.835110776" type="date" placeholder="" />
 </div>
 
 <div class="Gsalesp form-field">   
-<label>Salesperson</label>
-<input name="entry.1803696216" type="text" placeholder="" />
+<label for="salesman">Salesperson</label>
+<input id="salesman" name="entry.1803696216" type="text" placeholder="" />
 </div>
 
 <div class="Gprice form-field">   
-<label>Sale Price</label>
-<input name="entry.1479748284" type="text" placeholder="" />
+<label for="sprice">Sale Price</label>
+<input id="sprice" name="entry.1479748284" type="text" placeholder="" />
 </div>
 
 <div class="Gfirst form-field">   
-<label>First Name</label>
-<input name="entry.1896447446" type="text" placeholder="" />
+<label for="fname">First Name</label>
+<input id="fname" name="entry.1896447446" type="text" placeholder="" />
 </div>
 
 <div class="Glast form-field">   
-<label>Last Name</label>
-<input name="entry.1387502817" type="text" placeholder="" />
+<label for="lname">Last Name</label>
+<input id="lname" name="entry.1387502817" type="text" placeholder="" />
 </div>
 
 <div class="Gstreet form-field">   
-<label>Street</label>
-<input name="entry.474662515" type="text" placeholder="" />
+<label for="street">Street</label>
+<input id="street" name="entry.474662515" type="text" placeholder="" />
 </div>
 
 <div class="GcityST form-field">   
-<label>City/State</label>
-<input name="entry.1353087319" type="text" placeholder="" />
+<label for="cityst">City/State</label>
+<input id="cityst" name="entry.1353087319" type="text" placeholder="" />
 </div>
 
 <div class="Gzip form-field">   
-<label>Zip</label>
-<input name="entry.1528061623" type="text" placeholder="" />
+<label for="zipcode">Zip</label>
+<input id="zipcode" name="entry.1528061623" type="text" placeholder="" />
 </div>
 
 
 <div class="Gphone form-field">   
-<label>Phone</label>
-<input name="entry.30830654" type="text" placeholder="" />
+<label for="phonenum">Phone</label>
+<input id="phonenum" name="entry.30830654" type="text" placeholder="" />
 </div>
 
 <input type="hidden" name="entry.835110776_year" value="">
@@ -175,7 +218,7 @@ window.onload = loadDataFromCookies;
 
 <div class="Gbtnsub form-field">  
     <label for=""></label>
-<input type="submit" value="Send" />
+<input type="submit" value="Submit" />
 <span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
 </div>
 </form>
