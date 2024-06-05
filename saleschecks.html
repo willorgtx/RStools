@@ -4,50 +4,7 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
-  <script>
-  let url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse"; //action url
-  let form = document.querySelector("#form"); //form element
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault(); //prevent default behaviour
-
-    fetch(url, {
-        method: "POST",
-        mode: "no-cors",
-        header: {
-          'Content-Type': 'application/json'
-        },
-        body: getInputData()
-      })
-      .then(data => {
-        console.log(data);
-        $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
-        alert("Form Submitted");
-      })
-      .catch(err => console.error(err));
-  });
-
-  //populating input data
-  function getInputData() {
-    let dataToPost = new FormData(); //formdata API
-
-    //fill name attributes to corresponding values
-    dataToPost.append("entry.115620161", document.querySelector("#rugnum").value);
-    dataToPost.append("entry.835110776", document.querySelector("#datesold").value);
-    dataToPost.append("entry.1803696216", document.querySelector("#salesman").value);
-    dataToPost.append("entry.1479748284", document.querySelector("#sprice").value);
-    dataToPost.append("entry.1896447446", document.querySelector("#fname").value);
-    dataToPost.append("entry.1387502817", document.querySelector("#lname").value);
-    dataToPost.append("entry.474662515", document.querySelector("#street").value);
-    dataToPost.append("entry.1353087319", document.querySelector("#cityst").value);
-    dataToPost.append("entry.1528061623", document.querySelector("#zipcode").value);
-    dataToPost.append("entry.30830654", document.querySelector("#phonenum").value);
-    dataToPost.append("entry.835110776_year", "");
-    dataToPost.append("entry.835110776_month", "");
-    dataToPost.append("entry.835110776_day", "");
-    return dataToPost;
-  }    
-  </script>
+  
 </head>
         
 <body>
@@ -217,11 +174,57 @@ window.onload = loadDataFromCookies;
 <input type="hidden" name="entry.835110776_day" value="">
 
 <div class="Gbtnsub form-field">  
-    <label for=""></label>
-<input type="submit" value="Submit" />
+    <label for="submitbtn"></label>
+<input id="submitbtn" type="submit" value="Submit" />
 <span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
 </div>
 </form>
 
+
+
+<script>
+  let url = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse"; //action url
+  let form = document.querySelector("#form"); //form element
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); //prevent default behaviour
+
+    fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        header: {
+          'Content-Type': 'application/json'
+        },
+        body: getInputData()
+      })
+      .then(data => {
+        console.log(data);
+        $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
+        alert("Form Submitted");
+      })
+      .catch(err => console.error(err));
+  });
+
+  //populating input data
+  function getInputData() {
+    let dataToPost = new FormData(); //formdata API
+
+    //fill name attributes to corresponding values
+    dataToPost.append("entry.115620161", document.querySelector("#rugnum").value);
+    dataToPost.append("entry.835110776", document.querySelector("#datesold").value);
+    dataToPost.append("entry.1803696216", document.querySelector("#salesman").value);
+    dataToPost.append("entry.1479748284", document.querySelector("#sprice").value);
+    dataToPost.append("entry.1896447446", document.querySelector("#fname").value);
+    dataToPost.append("entry.1387502817", document.querySelector("#lname").value);
+    dataToPost.append("entry.474662515", document.querySelector("#street").value);
+    dataToPost.append("entry.1353087319", document.querySelector("#cityst").value);
+    dataToPost.append("entry.1528061623", document.querySelector("#zipcode").value);
+    dataToPost.append("entry.30830654", document.querySelector("#phonenum").value);
+    dataToPost.append("entry.835110776_year", "");
+    dataToPost.append("entry.835110776_month", "");
+    dataToPost.append("entry.835110776_day", "");
+    return dataToPost;
+  }    
+  </script>
 </body>
 </html>
