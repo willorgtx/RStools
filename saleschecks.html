@@ -71,7 +71,7 @@ window.onload = loadDataFromCookies;
 </script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
-<form class="form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
+<form id="form" class="form validate" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
     onsubmit="submitted=true;">
     
 <div class="form-field">   
@@ -81,7 +81,7 @@ window.onload = loadDataFromCookies;
 
 <div class="form-field">   
 <label>Date</label>
-<input type="date" />
+<input name="entry.835110776" type="date" placeholder="" />
 </div>
 
 <div class="form-field">   
