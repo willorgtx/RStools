@@ -89,7 +89,7 @@ function saveDataToCookies() {
     $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
     for (var i = 0; i < formElements.length; i++) {
         var element = formElements[i];
-        if (element.name && element.type !== 'submit' && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161') {
+        if (element.name && element.type !== 'submit' && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161' && element.name !== 'entry.835110776_year' && element.name !== 'entry.835110776_month' && element.name !== 'entry.835110776_day') {
             document.cookie = encodeURIComponent(element.name) + '=' + encodeURIComponent(element.value) + ';path=/;max-age=86400'; // Expires in 1 day
         }
     }
@@ -101,7 +101,7 @@ function loadDataFromCookies() {
     for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i].split('=');
         var element = document.forms[0].elements[decodeURIComponent(cookie[0].trim())];
-        if (element && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161') {
+        if (element && element.name !== 'entry.1479748284' && element.name !== 'entry.115620161' && element.name !== 'entry.835110776_year' && element.name !== 'entry.835110776_month' && element.name !== 'entry.835110776_day') {
             element.value = decodeURIComponent(cookie[1]);
         }
     }
