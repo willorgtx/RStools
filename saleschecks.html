@@ -61,7 +61,12 @@ grid-row-gap: 0px;
 .Gzip { grid-area: 7 / 2 / 8 / 3; }
 .Gphone { grid-area: 8 / 2 / 9 / 3; }
 .Gbtnsub { grid-area: 9 / 2 / 10 / 3; }
-.Gbtnreset { grid-area: 9 / 1 / 10 / 3; }
+.Gbtnreset { grid-area: 9 / 1 / 1 / 1; }
+
+.Gbtnreset {
+    margin: 0 auto;
+    width: 50%;
+}
 
 input[type="submit"] {width: 30%;}
 
@@ -79,6 +84,8 @@ input[type="submit"] {width: 30%;}
     display: block;
   }
 }
+
+
 </style>
 
 
@@ -112,11 +119,29 @@ function loadDataFromCookies() {
 // Load data when the page is loaded
 window.onload = loadDataFromCookies;
 
+function clearFields() {
+    document.getElementById('rugnum').value = ''; // Clears the Rug # field
+    document.getElementById('sprice').value = ''; // Clears the Sale Price field
+}
+clearFields();
+
+function clearAllFields() {
+    document.getElementById('rugnum').value = ''; // Clears the Rug # field
+    document.getElementById('sprice').value = ''; // Clears the Sale Price field
+    document.getElementById('salesman').value = ''; 
+    document.getElementById('fname').value = '';
+    document.getElementById('lname').value = '';
+    document.getElementById('street').value = '';
+    document.getElementById('cityst').value = '';
+    document.getElementById('zipcode').value = '';
+    document.getElementById('phonenum').value = '';
+}
+
 </script>
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted)  {window.location='saleschecks.html';}"></iframe>
 
 <form id="form" class="parent form validate" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeNlwV9LWNmzSMP5213SV-fcPfz1azljnhstwy8oefVBRZZnA/formResponse" method="post" target="hidden_iframe"
-    onsubmit="submitted=true; saveDataToCookies();">
+    onsubmit="submitted=true; saveDataToCookies(); clearFields();">
     
 <div class="GRug form-field">   
 <label for="rugnum">Rug #</label>
@@ -174,10 +199,16 @@ window.onload = loadDataFromCookies;
 <input type="hidden" name="entry.835110776_day" value="">
 
 <div class="Gbtnsub form-field">  
-    <label for="submitbtn"></label>
+<label for="submitbtn"></label>
 <input id="submitbtn" type="submit" value="Submit" />
-<span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
+  <span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
 </div>
+
+<div class="Gbtnreset"> 
+    <label for="resetbtn"></label>
+    <input id="resetbtn" onclick="clearFields()" type="reset" value="Clear" />
+</div>
+
 </form>
 
 
@@ -200,7 +231,7 @@ window.onload = loadDataFromCookies;
       .then(data => {
         console.log(data);
         $(".successfully-saved").css("display", "block").delay(1000).fadeOut(400);
-        alert("Form Submitted");
+        //alert("Form Submitted");
       })
       .catch(err => console.error(err));
   });
