@@ -132,24 +132,46 @@ function loadDataFromCookies() {
 window.onload = loadDataFromCookies;
 
 document.addEventListener("DOMContentLoaded", function() {
+    var submitButton = document.getElementById("submitbtn");
+    var rugNumInput = document.getElementById("rugnum");
+    var sPriceInput = document.getElementById("sprice");
     var phoneInput = document.getElementById("phonenum");
+    var salesmanInput = document.getElementById("salesman");
+    var dateSoldInput = document.getElementById("datesold");
+    var lastNameInput = document.getElementById("lname");
 
-    phoneInput.addEventListener("input", function() {
-        var phonePattern = /^\d{3}-\d{3}-\d{4}$/; // Regex pattern for phone number
-        if (phonePattern.test(phoneInput.value)) {
-            phoneInput.setCustomValidity(""); // Clear custom validity message
-            phoneInput.style.borderColor = "green"; // Optional: change border color if valid
-        } else {
-            phoneInput.setCustomValidity("Invalid format, correct format is ###-###-####");
-            phoneInput.style.borderColor = "red"; // Optional: change border color if invalid
-        }
-    });
+    function validateForm() {
+        // Validate Rug Number
+        var isRugNumValid = /^\d+$/.test(rugNumInput.value);
 
-    phoneInput.addEventListener("invalid", function() {
-        // Alert or display an error message in a specific element
-        alert(phoneInput.validationMessage);
-    });
+        // Validate Sale Price
+        var isSPriceValid = /^[\d.]+$/.test(sPriceInput.value);
+
+        // Validate Phone Number (not required to be filled)
+        var isPhoneValid = phoneInput.value === '' || /^\d{3}-\d{3}-\d{4}$/.test(phoneInput.value);
+
+        // Validate Salesman, Date Sold, Last Name (must not be blank)
+        var isSalesmanValid = salesmanInput.value.trim() !== '';
+        var isDateSoldValid = dateSoldInput.value.trim() !== '';
+        var isLastNameValid = lastNameInput.value.trim() !== '';
+
+        // Enable submit button if all are valid
+        submitButton.disabled = !(isRugNumValid && isSPriceValid && isPhoneValid && isSalesmanValid && isDateSoldValid && isLastNameValid);
+    }
+
+    // Add event listeners
+    rugNumInput.addEventListener("input", validateForm);
+    sPriceInput.addEventListener("input", validateForm);
+    phoneInput.addEventListener("input", validateForm);
+    salesmanInput.addEventListener("input", validateForm);
+    dateSoldInput.addEventListener("input", validateForm);
+    lastNameInput.addEventListener("input", validateForm);
+
+    // Initial validation check
+    validateForm();
 });
+
+
 
 function clearFields() {
     document.getElementById('rugnum').value = ''; // Clears the Rug # field
@@ -177,32 +199,32 @@ function clearAllFields() {
     
 <div class="GRug form-field">   
 <label for="rugnum">Rug #</label>
-<input id="rugnum" name="entry.115620161" type="text" placeholder="" />
+<input id="rugnum" name="entry.115620161" type="text" placeholder="" pattern="^\d+$" title="Only integer values are allowed" required/>
 </div>
 
 <div class="Gdate form-field">   
 <label for="datesold">Date</label>
-<input id="datesold" name="entry.835110776" type="date" placeholder="" />
+<input id="datesold" name="entry.835110776" type="date" placeholder="" required />
 </div>
 
 <div class="Gsalesp form-field">   
 <label for="salesman">Salesperson</label>
-<input id="salesman" name="entry.1803696216" type="text" placeholder="" />
+<input id="salesman" name="entry.1803696216" type="text" placeholder="" required />
 </div>
 
 <div class="Gprice form-field">   
 <label for="sprice">Sale Price</label>
-<input id="sprice" name="entry.1479748284" type="text" placeholder="" />
+<input id="sprice" name="entry.1479748284" type="text" placeholder="" pattern="^\d+(\.\d+)?$" title="Enter a valid price without commas or symbols" required />
 </div>
 
 <div class="Gfirst form-field">   
 <label for="fname">First Name</label>
-<input id="fname" name="entry.1896447446" type="text" placeholder="" />
+<input id="fname" name="entry.1896447446" type="text" placeholder="" required />
 </div>
 
 <div class="Glast form-field">   
 <label for="lname">Last Name</label>
-<input id="lname" name="entry.1387502817" type="text" placeholder="" />
+<input id="lname" name="entry.1387502817" type="text" placeholder="" required />
 </div>
 
 <div class="Gstreet form-field">   
@@ -232,7 +254,7 @@ function clearAllFields() {
 
 <div class="Gbtnsub form-field">  
 <label for="submitbtn"></label>
-<input id="submitbtn" type="submit" value="Submit" />
+<input id="submitbtn" type="submit" value="Submit" disabled />
   <span class="successfully-saved"><i class="fa fa-thumbs-up"></i> Saved!</span>
 </div>
 
