@@ -131,6 +131,26 @@ function loadDataFromCookies() {
 // Load data when the page is loaded
 window.onload = loadDataFromCookies;
 
+document.addEventListener("DOMContentLoaded", function() {
+    var phoneInput = document.getElementById("phonenum");
+
+    phoneInput.addEventListener("input", function() {
+        var phonePattern = /^\d{3}-\d{3}-\d{4}$/; // Regex pattern for phone number
+        if (phonePattern.test(phoneInput.value)) {
+            phoneInput.setCustomValidity(""); // Clear custom validity message
+            phoneInput.style.borderColor = "green"; // Optional: change border color if valid
+        } else {
+            phoneInput.setCustomValidity("Invalid format, correct format is ###-###-####");
+            phoneInput.style.borderColor = "red"; // Optional: change border color if invalid
+        }
+    });
+
+    phoneInput.addEventListener("invalid", function() {
+        // Alert or display an error message in a specific element
+        alert(phoneInput.validationMessage);
+    });
+});
+
 function clearFields() {
     document.getElementById('rugnum').value = ''; // Clears the Rug # field
     document.getElementById('sprice').value = ''; // Clears the Sale Price field
