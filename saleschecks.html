@@ -98,6 +98,35 @@ input#submitbtn {
     background-color: #aaf0aa;
     color: #0a3c0a;
 }
+
+/* General styles for the submit button */
+#submitbtn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Bootstrap blue for example */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Styles for the disabled state of the submit button */
+#submitbtn:disabled {
+    background-color: #CCCCCC; /* Light gray */
+    cursor: not-allowed; /* Shows a 'no entry' cursor when hovered */
+    color: #666666; /* Darker gray text */
+}
+
+/* Styles for the hover state of the enabled submit button */
+#submitbtn:not(:disabled):hover {
+    background-color: #0056b3; /* A darker shade of blue */
+}
+
+/* Extra styles when the submit button is active (clicked) */
+#submitbtn:not(:disabled):active {
+    background-color: #004085; /* Even darker blue */
+
 </style>
 
 
@@ -143,12 +172,33 @@ document.addEventListener("DOMContentLoaded", function() {
     function validateForm() {
         // Validate Rug Number
         var isRugNumValid = /^\d+$/.test(rugNumInput.value);
+        if (isRugNumValid) {
+            rugNumInput.setCustomValidity(""); // Clear custom validity message
+            rugNumInput.style.borderColor = "green"; // Optional: change border color if valid
+        } else {
+            rugNumInput.setCustomValidity("Whole Numbers Only");
+            rugNumInput.style.borderColor = "red"; // Optional: change border color if invalid
+        }
 
         // Validate Sale Price
         var isSPriceValid = /^[\d.]+$/.test(sPriceInput.value);
+        if (isSPriceValid) {
+            sPriceInput.setCustomValidity(""); // Clear custom validity message
+            sPriceInput.style.borderColor = "green"; // Optional: change border color if valid
+        } else {
+            sPriceInput.setCustomValidity("No Commas, No $");
+            sPriceInput.style.borderColor = "red"; // Optional: change border color if invalid
+        }
 
         // Validate Phone Number (not required to be filled)
         var isPhoneValid = phoneInput.value === '' || /^\d{3}-\d{3}-\d{4}$/.test(phoneInput.value);
+        if (isPhoneValid) {
+            phoneInput.setCustomValidity(""); // Clear custom validity message
+            phoneInput.style.borderColor = "green"; // Optional: change border color if valid
+        } else {
+            phoneInput.setCustomValidity("Invalid format, correct format is ###-###-####");
+            phoneInput.style.borderColor = "red"; // Optional: change border color if invalid
+        }
 
         // Validate Salesman, Date Sold, Last Name (must not be blank)
         var isSalesmanValid = salesmanInput.value.trim() !== '';
